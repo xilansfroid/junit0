@@ -26,7 +26,7 @@ public class Emprestimo {
 	}
 
 	public void setUsuario(Usuario usuario) {
-		this.livro = livro;
+		this.usuario = usuario;
 	}
 
 	public String getDataEmprestimo() {
@@ -34,7 +34,10 @@ public class Emprestimo {
 	}
 
 	public void setDataEmprestimo(String dataEmprestimo) {
-		this.dataEmprestimo = dataEmprestimo;
+		if(validaData(dataEmprestimo))
+			this.dataEmprestimo = dataEmprestimo;
+		else 
+			throw new RuntimeException("Data invalida");
 	}
 
 	public String getDataDevolucao() {
@@ -42,13 +45,17 @@ public class Emprestimo {
 	}
 
 	public void setDataDevolucao(String data) {
-		this.dataDevolucao = data;
+		if(validaData(dataDevolucao))
+			this.dataDevolucao = data;
+		else
+			throw new RuntimeException("Data invalida");
 	}
 
 	/**
 	 * * valida o formato da data * @param data no formato dd/MM/yyyy * @return true
 	 * se a data estiver no formato valido e false para formato invalido
 	 */
+	
 	public boolean validaData(String data) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		df.setLenient(false); //

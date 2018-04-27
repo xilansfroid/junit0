@@ -31,6 +31,7 @@ public class UC01RegistraEmprestimoDeLivro {
 		usuario.setRa("11111");
 		usuario.setNome("Jose da Silva");
 		servico = new ServicoEmprestimo();
+		emprestimo = new Emprestimo();
 	}
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
@@ -71,7 +72,55 @@ public class UC01RegistraEmprestimoDeLivro {
 		emprestimo.setLivro(null);
 	}
 	
+	@Test
+	public void CT07UC01FB_verifica_estado() {
+		//cenario
+		Livro umLivro = new Livro();
+		umLivro.setIsbn("121212");
+		umLivro.setTitulo("Engenharia de Software");
+		umLivro.setAutor("Sommerville");
+		
+		Emprestimo umEmprestimo = new Emprestimo();
+		
+		//acao
+		umEmprestimo.setLivro(umLivro);
+		
+		//validacao
+		assertTrue(umEmprestimo.getLivro().equals(umLivro));
 	
+	}
+	
+	@Test
+	public void CT08UC01FB_verifica_usuario() {
+		//cenario
+		Usuario umUsuario = new Usuario();
+		umUsuario.setRa("11111");
+		umUsuario.setNome("Jose da Silva");
+		
+		
+		Emprestimo umEmprestimo = new Emprestimo();
+		
+		//acao
+		umEmprestimo.setUsuario(umUsuario);
+		
+		//validacao
+		assertTrue(umEmprestimo.getUsuario().equals(umUsuario));
+	
+	}
+
+
+	@Test(expected=RuntimeException.class)
+	public void CT09UC01FB_valida_data(){
+		emprestimo.setDataEmprestimo("26-04-2018");
+		
+	}
+	
+	@Test(expected=RuntimeException.class)
+	public void CT09UC01FB_valida_data_devolucao(){
+		emprestimo.setDataDevolucao("32/04/2018");
+		
+	}
+
 	
 	
 	
